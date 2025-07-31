@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
-public class EntradaEstoque {
+public class SaidaEstoque {
     @Id
     @GeneratedValue
     private Long id;
@@ -17,6 +17,6 @@ public class EntradaEstoque {
     private Ingrediente ingrediente;
 
     private Double quantidade;
-    private LocalDateTime dataEntrada;
-    private String fornecedor;
+    private LocalDateTime saidaEntrada;
+    private String motivo;
 }
