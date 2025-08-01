@@ -13,6 +13,7 @@ public class Cliente {
     private Long id;
     private String nome;
     private String telefone;
+    private String endereco;
 
     public Cliente() {
     }
@@ -36,6 +37,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public Long getId() {

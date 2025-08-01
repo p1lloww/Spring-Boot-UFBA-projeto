@@ -1,5 +1,6 @@
 package entity;
 
+import enums.StatusMesa;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,15 +14,15 @@ public class Mesa {
     private Long id;
     private Integer numero;
     private Integer capacidade;
-    private String Status;
+    private StatusMesa status;
 
     public Mesa() {
     }
 
-    public Mesa(Integer numero, Integer capacidade, String status) {
+    public Mesa(Integer numero, Integer capacidade, StatusMesa status) {
         this.numero = numero;
         this.capacidade = capacidade;
-        Status = status;
+        this.status = status;
     }
 
     public Integer getNumero() {
@@ -40,12 +41,12 @@ public class Mesa {
         this.capacidade = capacidade;
     }
 
-    public String getStatus() {
-        return Status;
+    public StatusMesa getStatus() {
+        return status;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setStatus(StatusMesa status) {
+        this.status = status;
     }
 
     public Long getId() {
@@ -55,11 +56,11 @@ public class Mesa {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Mesa mesa)) return false;
-        return Objects.equals(id, mesa.id) && Objects.equals(numero, mesa.numero) && Objects.equals(capacidade, mesa.capacidade) && Objects.equals(Status, mesa.Status);
+        return Objects.equals(id, mesa.id) && Objects.equals(numero, mesa.numero) && Objects.equals(capacidade, mesa.capacidade) && Objects.equals(status, mesa.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, numero, capacidade, Status);
+        return Objects.hash(id, numero, capacidade, status);
     }
 }
