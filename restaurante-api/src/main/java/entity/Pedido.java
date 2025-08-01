@@ -20,6 +20,9 @@ public class Pedido {
     @OneToOne
     private Mesa mesa;
 
+    @OneToOne(mappedBy = "pedido")
+    private SaidaEstoque saidaEstoque;
+
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 

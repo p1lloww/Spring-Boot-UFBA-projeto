@@ -1,9 +1,7 @@
 package entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import enums.MotivoEnum;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -17,17 +15,20 @@ public class SaidaEstoque {
     @ManyToOne
     private Ingrediente ingrediente;
 
+    @OneToOne
+    private Pedido pedido;
+
     private Double quantidade;
-    private LocalDateTime saidaEntrada;
-    private String motivo;
+    private LocalDateTime dataSaida;
+    private MotivoEnum motivo;
 
     public SaidaEstoque() {
     }
 
-    public SaidaEstoque(Ingrediente ingrediente, Double quantidade, LocalDateTime saidaEntrada, String motivo) {
+    public SaidaEstoque(Ingrediente ingrediente, Double quantidade, LocalDateTime saidaEntrada, MotivoEnum motivo) {
         this.ingrediente = ingrediente;
         this.quantidade = quantidade;
-        this.saidaEntrada = saidaEntrada;
+        this.dataSaida = saidaEntrada;
         this.motivo = motivo;
     }
 
@@ -48,18 +49,18 @@ public class SaidaEstoque {
     }
 
     public LocalDateTime getSaidaEntrada() {
-        return saidaEntrada;
+        return dataSaida;
     }
 
     public void setSaidaEntrada(LocalDateTime saidaEntrada) {
-        this.saidaEntrada = saidaEntrada;
+        dataSaida = saidaEntrada;
     }
 
-    public String getMotivo() {
+    public MotivoEnum getMotivo() {
         return motivo;
     }
 
-    public void setMotivo(String motivo) {
+    public void setMotivo(MotivoEnum motivo) {
         this.motivo = motivo;
     }
 
@@ -70,11 +71,11 @@ public class SaidaEstoque {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof SaidaEstoque that)) return false;
-        return Objects.equals(id, that.id) && Objects.equals(ingrediente, that.ingrediente) && Objects.equals(quantidade, that.quantidade) && Objects.equals(saidaEntrada, that.saidaEntrada) && Objects.equals(motivo, that.motivo);
+        return Objects.equals(id, that.id) && Objects.equals(ingrediente, that.ingrediente) && Objects.equals(quantidade, that.quantidade) && Objects.equals(dataSaida, that.dataSaida) && Objects.equals(motivo, that.motivo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ingrediente, quantidade, saidaEntrada, motivo);
+        return Objects.hash(id, ingrediente, quantidade, dataSaida, motivo);
     }
 }
