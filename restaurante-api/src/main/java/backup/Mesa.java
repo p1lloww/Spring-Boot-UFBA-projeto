@@ -1,4 +1,4 @@
-package entity;
+package backup;
 
 import enums.StatusMesa;
 import jakarta.persistence.Entity;

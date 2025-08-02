@@ -1,16 +1,13 @@
-package DTO;
+package DTO.categoria;
 
-import entity.Prato;
-import entity.PratoIngrediente;
+import DTO.prato.PratoDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaDTO {
-
+public class CriarCategoriaDTO {
 
     @NotNull(message = "o nome é invalido")
     @NotEmpty(message = "o nome é invalido")
@@ -25,10 +22,10 @@ public class CategoriaDTO {
     @NotNull(message = "pratos é invalido")
     private List<PratoDTO> pratos;
 
-    public CategoriaDTO() {
+    public CriarCategoriaDTO() {
     }
 
-    public CategoriaDTO(String nome, String descricao) {
+    public CriarCategoriaDTO(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
@@ -60,4 +57,5 @@ public class CategoriaDTO {
     public void removePratoDTO(PratoDTO pratoIngredienteVar) {
         pratos.remove(pratoIngredienteVar);
     }
+
 }

@@ -1,6 +1,5 @@
-package DTO;
+package backup;
 
-import entity.PratoIngrediente;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

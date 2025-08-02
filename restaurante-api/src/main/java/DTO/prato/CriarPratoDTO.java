@@ -1,13 +1,13 @@
-package DTO;
+package DTO.prato;
 
-import entity.PratoIngrediente;
+import DTO.categoria.CategoriaDTO;
+import backup.PratoIngredienteDTO;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class PratoDTO {
-
+public class CriarPratoDTO {
 
     @NotNull(message = "o nome não pode ser nulo")
     @NotEmpty(message = "o nome não pode estar vazio")
@@ -30,14 +30,10 @@ public class PratoDTO {
     @NotNull(message = "categoria não pode ser nulo")
     private CategoriaDTO categoria;
 
-    @NotNull(message = "prato ingrediente não pode ser nulo")
-    @Size(message = "o prato precisa ter ingredientes", min = 1)
-    private List<PratoIngredienteDTO> pratoIngredientes;
-
-    public PratoDTO() {
+    public CriarPratoDTO() {
     }
 
-    public PratoDTO(String nome, String descricao, BigDecimal preco, Integer tempoDePreparo, CategoriaDTO categoria) {
+    public CriarPratoDTO(String nome, String descricao, BigDecimal preco, Integer tempoDePreparo, CategoriaDTO categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -83,17 +79,5 @@ public class PratoDTO {
 
     public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
-    }
-
-    public List<PratoIngredienteDTO> getPratoIngredientes() {
-        return pratoIngredientes;
-    }
-
-    public void addPratoIngredienteDTO(PratoIngredienteDTO pratoIngredienteVar) {
-        pratoIngredientes.add(pratoIngredienteVar);
-    }
-
-    public void removePratoIngredienteDTO(PratoIngredienteDTO pratoIngredienteVar) {
-        pratoIngredientes.remove(pratoIngredienteVar);
     }
 }

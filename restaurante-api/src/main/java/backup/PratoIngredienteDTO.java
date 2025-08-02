@@ -1,5 +1,6 @@
-package DTO;
+package backup;
 
+import DTO.prato.PratoDTO;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

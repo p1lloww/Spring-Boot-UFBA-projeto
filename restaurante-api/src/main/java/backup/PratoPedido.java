@@ -1,5 +1,7 @@
-package entity;
+package backup;
 
+import entity.Pedido;
+import entity.Prato;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

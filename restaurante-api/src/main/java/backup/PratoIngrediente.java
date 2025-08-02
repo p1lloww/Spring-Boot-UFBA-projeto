@@ -1,5 +1,6 @@
-package entity;
+package backup;
 
+import entity.Prato;
 import jakarta.persistence.*;
 
 import java.util.Objects;
