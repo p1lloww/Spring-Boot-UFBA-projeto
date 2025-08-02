@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import enums.StatusPedido;
+import backup.Mesa;
+import backup.SaidaEstoque;
 
 @Entity
 public class Pedido {
@@ -17,12 +19,6 @@ public class Pedido {
     @ManyToOne
     private Cliente cliente;
 
-    @OneToOne
-    private Mesa mesa;
-
-    @OneToOne(mappedBy = "pedido")
-    private SaidaEstoque saidaEstoque;
-
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
@@ -32,9 +28,8 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Cliente cliente, Mesa mesa, StatusPedido status, BigDecimal total, LocalDateTime dataHora) {
+    public Pedido(Cliente cliente, StatusPedido status, BigDecimal total, LocalDateTime dataHora) {
         this.cliente = cliente;
-        this.mesa = mesa;
         this.status = status;
         this.total = total;
         this.dataHora = dataHora;
@@ -46,14 +41,6 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public Mesa getMesa() {
-        return mesa;
-    }
-
-    public void setMesa(Mesa mesa) {
-        this.mesa = mesa;
     }
 
     public StatusPedido getStatus() {
@@ -87,11 +74,11 @@ public class Pedido {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Pedido pedido)) return false;
-        return Objects.equals(id, pedido.id) && Objects.equals(cliente, pedido.cliente) && Objects.equals(mesa, pedido.mesa) && status == pedido.status && Objects.equals(total, pedido.total) && Objects.equals(dataHora, pedido.dataHora);
+        return Objects.equals(id, pedido.id) && Objects.equals(cliente, pedido.cliente) && status == pedido.status && Objects.equals(total, pedido.total) && Objects.equals(dataHora, pedido.dataHora);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cliente, mesa, status, total, dataHora);
+        return Objects.hash(id, cliente, status, total, dataHora);
     }
 }

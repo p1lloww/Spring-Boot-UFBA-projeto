@@ -1,6 +1,7 @@
 package entity;
 
 import jakarta.persistence.*;
+import backup.PratoIngrediente;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

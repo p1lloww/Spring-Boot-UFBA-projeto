@@ -1,6 +1,6 @@
 package repository;
 
-import entity.PratoPedido;
+import backup.PratoPedido;
 import entity.Pedido;
 import entity.Prato;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,8 +1,8 @@
 package repository;
 
-import entity.Ingrediente;
+import backup.Ingrediente;
 import entity.Prato;
-import entity.PratoIngrediente;
+import backup.PratoIngrediente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,7 +1,7 @@
 package repository;
 
 import entity.Cliente;
-import entity.Mesa;
+import backup.Mesa;
 import entity.Pedido;
 import enums.StatusPedido;
 import org.springframework.data.jpa.repository.JpaRepository;

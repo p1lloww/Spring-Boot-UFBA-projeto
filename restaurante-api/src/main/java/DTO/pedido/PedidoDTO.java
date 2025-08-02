@@ -1,18 +1,18 @@
-package DTO;
+package DTO.pedido;
 
+import DTO.cliente.ClienteDTO;
 import enums.StatusPedido;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import backup.MesaDTO;
+import backup.SaidaEstoqueDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class PedidoDTO {
 
-
     private ClienteDTO cliente;
-
-    private MesaDTO mesa;
 
     private SaidaEstoqueDTO saidaEstoque;
 
@@ -31,7 +31,6 @@ public class PedidoDTO {
 
     public PedidoDTO(ClienteDTO cliente, MesaDTO mesa, SaidaEstoqueDTO saidaEstoque, StatusPedido status, BigDecimal total, LocalDateTime dataHora) {
         this.cliente = cliente;
-        this.mesa = mesa;
         this.saidaEstoque = saidaEstoque;
         this.status = status;
         this.total = total;
@@ -44,14 +43,6 @@ public class PedidoDTO {
 
     public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
-    }
-
-    public MesaDTO getMesa() {
-        return mesa;
-    }
-
-    public void setMesa(MesaDTO mesa) {
-        this.mesa = mesa;
     }
 
     public SaidaEstoqueDTO getSaidaEstoque() {

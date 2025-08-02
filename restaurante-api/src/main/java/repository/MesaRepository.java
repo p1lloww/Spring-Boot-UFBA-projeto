@@ -1,6 +1,6 @@
 package repository;
 
-import entity.Mesa;
+import backup.Mesa;
 import enums.StatusMesa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

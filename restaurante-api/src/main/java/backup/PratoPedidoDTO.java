@@ -1,5 +1,7 @@
-package DTO;
+package backup;
 
+import DTO.pedido.PedidoDTO;
+import DTO.prato.PratoDTO;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;

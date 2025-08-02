@@ -1,8 +1,8 @@
 package repository;
 
-import entity.Ingrediente;
+import backup.Ingrediente;
 import entity.Pedido;
-import entity.SaidaEstoque;
+import backup.SaidaEstoque;
 import enums.MotivoEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
