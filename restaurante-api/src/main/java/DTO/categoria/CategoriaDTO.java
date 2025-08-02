@@ -51,6 +51,10 @@ public class CategoriaDTO {
         return pratos;
     }
 
+    public void setPratos(List<PratoDTO> pratos) {
+        this.pratos = pratos;
+    }
+
     public void addPratoDTO(PratoDTO pratoIngredienteVar) {
         pratos.add(pratoIngredienteVar);
     }

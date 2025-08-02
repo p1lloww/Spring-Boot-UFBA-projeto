@@ -55,6 +55,10 @@ public class Categoria {
         return pratos;
     }
 
+    public void setPratos(List<Prato> pratos) {
+        this.pratos = pratos;
+    }
+
     public Long getId() {
         return id;
     }
