@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-public class ItemPedido {
+public class PratoPedido {
     @Id
     @GeneratedValue
     private Long id;
@@ -24,10 +24,10 @@ public class ItemPedido {
     private String descricao;
     private BigDecimal subtotal;
 
-    public ItemPedido() {
+    public PratoPedido() {
     }
 
-    public ItemPedido(Pedido pedido, Prato prato, Integer quantidade, String descricao, BigDecimal subtotal) {
+    public PratoPedido(Pedido pedido, Prato prato, Integer quantidade, String descricao, BigDecimal subtotal) {
         this.pedido = pedido;
         this.prato = prato;
         this.quantidade = quantidade;
@@ -81,7 +81,7 @@ public class ItemPedido {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof ItemPedido that)) return false;
+        if (!(o instanceof PratoPedido that)) return false;
         return Objects.equals(id, that.id) && Objects.equals(pedido, that.pedido) && Objects.equals(prato, that.prato) && Objects.equals(quantidade, that.quantidade) && Objects.equals(descricao, that.descricao) && Objects.equals(subtotal, that.subtotal);
     }
 
