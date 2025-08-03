@@ -55,7 +55,7 @@ public class PratoService {
         );
         prato.setNome(pratoDTO.getNome());
         prato.setDescricao(pratoDTO.getDescricao());
-        prato.setCategoria(ObjectMapper.parseObject(pratoDTO.getCategoria(), Categoria.class));
+        //prato.setCategoria(ObjectMapper.parseObject(pratoDTO.getCategoria(), Categoria.class));
         prato.setPreco(pratoDTO.getPreco());
         prato.setTempoDePreparo(pratoDTO.getTempoDePreparo());
         PratoDTO pratoDTOAtualizado = ObjectMapper.parseObject(prato, PratoDTO.class);

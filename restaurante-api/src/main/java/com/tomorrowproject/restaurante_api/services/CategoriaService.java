@@ -24,12 +24,6 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private PratoRepository pratoRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Transactional
     public List<CategoriaDTO> buscarTodasAsCategorias() {
 

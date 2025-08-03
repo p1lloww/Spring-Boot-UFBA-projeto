@@ -14,7 +14,8 @@ public class Categoria {
     private String nome;
     private String descricao;
 
-    @OneToMany(mappedBy = "categoria")
+    //@OneToMany(mappedBy = "categoria")
+    @OneToMany
     List<Prato> pratos = new ArrayList<>();
 
     public Categoria() {
@@ -25,15 +26,15 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-    public void addPrato(Prato prato){
-        pratos.add(prato);
-        prato.setCategoria(this);
-    }
+//    public void addPrato(Prato prato){
+//        pratos.add(prato);
+//        prato.setCategoria(this);
+//    }
 
-    public void removePrato(Prato prato){
-        pratos.remove(prato);
-        prato.setCategoria(null);
-    }
+//    public void removePrato(Prato prato){
+//        pratos.remove(prato);
+//        prato.setCategoria(null);
+//    }
 
     public String getNome() {
         return nome;

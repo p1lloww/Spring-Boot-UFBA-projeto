@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -42,5 +43,18 @@ public class PratoController {
     public ResponseEntity<Void> deletarPrato(@PathParam("id") Long Id) {
         pratoService.excluirPrato(Id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/mock")
+    public void mock() {
+        for (int i = 0; i <= 3; i++) {
+            PratoDTO pratoDTO = new PratoDTO();
+            pratoDTO.setNome("test");
+            pratoDTO.setPreco(BigDecimal.valueOf(i));
+            pratoDTO.setTempoDePreparo(i);
+            pratoDTO.setDescricao("teste");
+
+            pratoService.criarPrato(pratoDTO);
+        }
     }
 }

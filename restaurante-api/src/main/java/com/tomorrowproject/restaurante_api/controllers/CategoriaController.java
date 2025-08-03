@@ -3,6 +3,10 @@ package com.tomorrowproject.restaurante_api.controllers;
 import com.tomorrowproject.restaurante_api.DTO.categoria.CategoriaDTO;
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
+import com.tomorrowproject.restaurante_api.entity.Categoria;
+import com.tomorrowproject.restaurante_api.entity.Prato;
+import com.tomorrowproject.restaurante_api.repository.PratoRepository;
+import com.tomorrowproject.restaurante_api.services.PratoService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +22,12 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @Autowired
+    private PratoService pratoService;
+
+    @Autowired
+    private PratoRepository pratoRepository;
 
     @GetMapping
     public ResponseEntity<List<CategoriaDTO>> findAll() {
@@ -48,5 +58,19 @@ public class CategoriaController {
     public ResponseEntity<List<PratoDTO>> listarPRatosDeUmaCategoria(@PathParam("id") Long Id) {
         List<PratoDTO> pratos = categoriaService.buscarPratosPorCategoriaId(Id);
         return ResponseEntity.ok(pratos);
+    }
+
+    @GetMapping("/mock")
+    public ResponseEntity<CategoriaDTO> mock() {
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+        categoriaDTO.setNome("teste");
+        categoriaDTO.setDescricao("teste");
+
+        CategoriaDTO categoriaSalva = categoriaService.criarCategoria(categoriaDTO);
+
+        categoriaDTO.setPratos(ObjectMapper.parseListObjects(pratoRepository.findAll(), PratoDTO.class));
+        //categoriaDTO.addPratoDTO(pratoRepository.findById(1L));
+
+        return ResponseEntity.ok(categoriaSalva);
     }
 }

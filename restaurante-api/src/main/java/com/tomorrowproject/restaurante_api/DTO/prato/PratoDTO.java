@@ -25,11 +25,8 @@ public class PratoDTO {
     @Min(message = "o tempo de preparo precisa ser maior que 0", value = 1)
     private Integer tempoDePreparo;
 
-    @NotNull(message = "categoria não pode ser nulo")
-    private CategoriaDTO categoria;
-
-    @NotNull(message = "prato ingrediente não pode ser nulo")
-    @Size(message = "o prato precisa ter ingredientes", min = 1)
+    //@NotNull(message = "categoria não pode ser nulo")
+    //private CategoriaDTO categoria;
 
     public PratoDTO() {
     }
@@ -39,7 +36,7 @@ public class PratoDTO {
         this.descricao = descricao;
         this.preco = preco;
         this.tempoDePreparo = tempoDePreparo;
-        this.categoria = categoria;
+        //this.categoria = categoria;
     }
 
     public String getNome() {
@@ -74,11 +71,11 @@ public class PratoDTO {
         this.tempoDePreparo = tempoDePreparo;
     }
 
-    public CategoriaDTO getCategoria() {
-        return categoria;
-    }
+    //public CategoriaDTO getCategoria() {
+    //    return categoria;
+    //}
 
-    public void setCategoria(CategoriaDTO categoria) {
-        this.categoria = categoria;
-    }
+    //public void setCategoria(CategoriaDTO categoria) {
+    //    this.categoria = categoria;
+    //}
 }

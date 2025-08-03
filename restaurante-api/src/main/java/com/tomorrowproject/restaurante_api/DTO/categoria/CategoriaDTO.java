@@ -51,6 +51,10 @@ public class CategoriaDTO {
         return pratos;
     }
 
+    public List<PratoDTO> getPratos() {
+        return pratos;
+    }
+
     public void setPratos(List<PratoDTO> pratos) {
         this.pratos = pratos;
     }

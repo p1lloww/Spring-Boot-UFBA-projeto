@@ -1,6 +1,7 @@
 package com.tomorrowproject.restaurante_api.controllers;
 
 import com.tomorrowproject.restaurante_api.DTO.cliente.ClienteDTO;
+import com.tomorrowproject.restaurante_api.DTO.pedido.CriarPedidoDTO;
 import com.tomorrowproject.restaurante_api.DTO.pedido.PedidoDTO;
 import com.tomorrowproject.restaurante_api.repository.PedidoRepository;
 import com.tomorrowproject.restaurante_api.services.ClienteService;
@@ -30,8 +31,8 @@ public class PedidoController {
 
     @PostMapping("/criarPedido")
     public ResponseEntity<PedidoDTO> criarPedido(@RequestBody PedidoDTO pedidoDTO) {
-        PedidoDTO pedidoCriada = pedidoService.criarPedido(pedidoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoCriada);
+        PedidoDTO pedidoCriado = pedidoService.criarPedido(pedidoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoCriado);
     }
 
     @PutMapping("/{id}")

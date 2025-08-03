@@ -1,5 +1,6 @@
 package com.tomorrowproject.restaurante_api.services;
 
+import com.tomorrowproject.restaurante_api.DTO.pedido.CriarPedidoDTO;
 import com.tomorrowproject.restaurante_api.DTO.pedido.PedidoDTO;
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
@@ -50,6 +51,7 @@ public class PedidoService {
 
     @Transactional
     public PedidoDTO criarPedido(PedidoDTO pedidoDTO) {
+        pedidoDTO.setDataHora(LocalDateTime.now());
         Pedido pedido = ObjectMapper.parseObject(pedidoDTO, Pedido.class);
         Pedido pedidoSalvo = pedidoRepository.save(pedido);
         PedidoDTO pedidoDTOSalvo = ObjectMapper.parseObject(pedidoSalvo, PedidoDTO.class);
