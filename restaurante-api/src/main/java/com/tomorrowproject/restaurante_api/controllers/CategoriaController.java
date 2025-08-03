@@ -19,9 +19,6 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @Autowired
-    private ObjectMapper mapper;
-
     @GetMapping
     public ResponseEntity<List<CategoriaDTO>> findAll() {
 
@@ -30,7 +27,7 @@ public class CategoriaController {
     }
 
     @PostMapping("/criarCategoria")
-    public ResponseEntity<CategoriaDTO> criarCategoria(CategoriaDTO categoriaDTO) {
+    public ResponseEntity<CategoriaDTO> criarCategoria(@RequestBody CategoriaDTO categoriaDTO) {
         CategoriaDTO categoriaCriada = categoriaService.criarCategoria(categoriaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaCriada);
     }

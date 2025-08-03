@@ -32,7 +32,6 @@ public class CategoriaService {
 
     @Transactional
     public List<CategoriaDTO> buscarTodasAsCategorias() {
-        log.info("Buscando todos os usuarios");
 
         List<Categoria> categorias = categoriaRepository.findAllByOrderByNomeAsc();
         List<CategoriaDTO> categoriasDTO = ObjectMapper.parseListObjects(categorias, CategoriaDTO.class);
@@ -42,7 +41,6 @@ public class CategoriaService {
 
     @Transactional
     public CategoriaDTO BuscarCategoriaPorID(Long Id) {
-        log.info("Buscando Categoria Por Id");
 
         Categoria categoria = categoriaRepository.findById(Id).orElseThrow(() -> new ExecutionException("exception id"));
 
@@ -61,7 +59,6 @@ public class CategoriaService {
 
     @Transactional
     public CategoriaDTO atualizarCategoria(Long Id, CategoriaDTO categoriaDTO) {
-        log.info("atualizando Categoria");
 
         Categoria categoriaExistente = categoriaRepository.findById(Id).orElseThrow(
                 () -> new IllegalArgumentException()

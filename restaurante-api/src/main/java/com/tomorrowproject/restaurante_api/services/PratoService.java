@@ -22,8 +22,6 @@ public class PratoService {
 
     @Transactional
     public List<PratoDTO> buscarTodosOsPratos() {
-        log.info("Buscando todos os Pratos");
-
         List<Prato> pratos = pratoRepository.findAllByOrderByNomeAsc();
         List<PratoDTO> pratosDTO = ObjectMapper.parseListObjects(pratos, PratoDTO.class);
 
@@ -32,8 +30,6 @@ public class PratoService {
 
     @Transactional
     public PratoDTO buscarPratoPorID(Long Id) {
-        log.info("Buscando Prato de ID {}", Id);
-
         Prato prato = pratoRepository.findById(Id).orElseThrow(
                 () -> new IllegalArgumentException()
         );
