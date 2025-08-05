@@ -1,10 +1,8 @@
 package com.tomorrowproject.restaurante_api.controllers;
 
-import com.tomorrowproject.restaurante_api.DTO.cliente.ClienteDTO;
 import com.tomorrowproject.restaurante_api.DTO.pedido.CriarPedidoDTO;
 import com.tomorrowproject.restaurante_api.DTO.pedido.PedidoDTO;
 import com.tomorrowproject.restaurante_api.repository.PedidoRepository;
-import com.tomorrowproject.restaurante_api.services.ClienteService;
 import com.tomorrowproject.restaurante_api.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,9 +28,15 @@ public class PedidoController {
     }
 
     @PostMapping("/criarPedido")
-    public ResponseEntity<PedidoDTO> criarPedido(@RequestBody PedidoDTO pedidoDTO) {
-        PedidoDTO pedidoCriado = pedidoService.criarPedido(pedidoDTO);
+    public ResponseEntity<PedidoDTO> criarPedido(@RequestBody CriarPedidoDTO criarPedidoDTO) {
+        PedidoDTO pedidoCriado = pedidoService.criarPedido(criarPedidoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoCriado);
+    }
+
+    @PostMapping("/criarTeste/{quantidade}")
+    public ResponseEntity<List<PedidoDTO>> criarPedidosDeTeste(@PathVariable int quantidade) {
+        List<PedidoDTO> pedidosCriados = pedidoService.criarPedidosDeTeste(quantidade);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidosCriados);
     }
 
     @PutMapping("/{id}")

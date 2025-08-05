@@ -1,11 +1,7 @@
 package com.tomorrowproject.restaurante_api.controllers;
 
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
-import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
-import com.tomorrowproject.restaurante_api.entity.Categoria;
-import com.tomorrowproject.restaurante_api.entity.Prato;
 import com.tomorrowproject.restaurante_api.services.PratoService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/prato")
 public class PratoController {
-
     @Autowired
     private PratoService pratoService;
 
@@ -61,7 +56,6 @@ public class PratoController {
             pratoDTO.setPreco(BigDecimal.valueOf(i));
             pratoDTO.setTempoDePreparo(i);
             pratoDTO.setDescricao("teste");
-
             pratoService.criarPrato(pratoDTO);
         }
     }

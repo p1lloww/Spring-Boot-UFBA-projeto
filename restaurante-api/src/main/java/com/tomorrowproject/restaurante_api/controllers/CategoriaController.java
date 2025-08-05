@@ -2,9 +2,6 @@ package com.tomorrowproject.restaurante_api.controllers;
 
 import com.tomorrowproject.restaurante_api.DTO.categoria.CategoriaDTO;
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
-import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
-import com.tomorrowproject.restaurante_api.entity.Categoria;
-import com.tomorrowproject.restaurante_api.entity.Prato;
 import com.tomorrowproject.restaurante_api.repository.PratoRepository;
 import com.tomorrowproject.restaurante_api.services.PratoService;
 import jakarta.websocket.server.PathParam;
@@ -63,19 +60,8 @@ public class CategoriaController {
     }
 
     @GetMapping("/{id}/pratos")
-    public ResponseEntity<List<PratoDTO>> listarPRatosDeUmaCategoria(@PathParam("id") Long Id) {
+    public ResponseEntity<List<PratoDTO>> listarPratosDeUmaCategoria(@PathParam("id") Long Id) {
         List<PratoDTO> pratos = categoriaService.buscarPratosPorCategoriaId(Id);
         return ResponseEntity.ok(pratos);
-    }
-
-    @GetMapping("/mock")
-    public ResponseEntity<CategoriaDTO> mock() {
-        CategoriaDTO categoriaDTO = new CategoriaDTO();
-        categoriaDTO.setNome("teste");
-        categoriaDTO.setDescricao("teste");
-
-        CategoriaDTO categoriaSalva = categoriaService.criarCategoria(categoriaDTO);
-
-        return ResponseEntity.ok(categoriaSalva);
     }
 }
