@@ -42,6 +42,14 @@ public class CategoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaCriada);
     }
 
+    @PostMapping("/adicionarPrato/{idCategoria}/{idPrato}")
+    public ResponseEntity<CategoriaDTO> adicionarPrato(
+            @PathVariable("idCategoria") Long idCategoria, @PathVariable("idPrato") Long idPrato
+    ) {
+        CategoriaDTO categoriaDTOSalva = categoriaService.adicionarPrato(idPrato, idCategoria);
+        return ResponseEntity.ok(categoriaDTOSalva);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable("id") Long Id, @RequestBody CategoriaDTO categoriaDTO) {
         CategoriaDTO categoriaAtualizada = categoriaService.atualizarCategoria(Id, categoriaDTO);
@@ -67,9 +75,6 @@ public class CategoriaController {
         categoriaDTO.setDescricao("teste");
 
         CategoriaDTO categoriaSalva = categoriaService.criarCategoria(categoriaDTO);
-
-        categoriaDTO.setPratos(ObjectMapper.parseListObjects(pratoRepository.findAll(), PratoDTO.class));
-        //categoriaDTO.addPratoDTO(pratoRepository.findById(1L));
 
         return ResponseEntity.ok(categoriaSalva);
     }

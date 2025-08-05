@@ -1,6 +1,7 @@
 package com.tomorrowproject.restaurante_api.DTO.categoria;
 
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -45,10 +46,6 @@ public class CategoriaDTO {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public List<PratoDTO> getPratosDTO() {
-        return pratos;
     }
 
     public List<PratoDTO> getPratos() {

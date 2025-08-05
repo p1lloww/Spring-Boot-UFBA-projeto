@@ -4,6 +4,7 @@ import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
 import com.tomorrowproject.restaurante_api.entity.Categoria;
 import com.tomorrowproject.restaurante_api.entity.Prato;
+import com.tomorrowproject.restaurante_api.repository.CategoriaRepository;
 import com.tomorrowproject.restaurante_api.repository.PratoRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ public class PratoService {
 
     @Autowired
     private PratoRepository pratoRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Transactional
     public List<PratoDTO> buscarTodosOsPratos() {
@@ -47,6 +51,20 @@ public class PratoService {
 
         return pratoDTOSalvo;
     }
+
+//    @Transactional
+//    public PratoDTO adicionarCategoriaPrato(Long pratoId, Long categoriaId) {
+//        Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(
+//                () -> new IllegalArgumentException()
+//        );
+//        Prato prato = pratoRepository.findById(pratoId).orElseThrow(
+//                () -> new IllegalArgumentException()
+//        );
+//
+//        prato.setCategoria(categoria);
+//        pratoRepository.save(prato);
+//        return ObjectMapper.parseObject(prato, PratoDTO.class);
+//    }
 
     @Transactional
     public PratoDTO atualizarPrato(Long Id, PratoDTO pratoDTO) {

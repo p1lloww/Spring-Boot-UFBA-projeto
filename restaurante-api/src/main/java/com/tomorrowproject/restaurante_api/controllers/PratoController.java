@@ -21,7 +21,7 @@ public class PratoController {
     @Autowired
     private PratoService pratoService;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<PratoDTO>> findAll() {
         List<PratoDTO> pratosDTO = pratoService.buscarTodosOsPratos();
         return ResponseEntity.ok(pratosDTO);
@@ -33,14 +33,22 @@ public class PratoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(pratoDTOCriado);
     }
 
+//    @PostMapping("/adicionarCategoriaPrato/{idCategoria}/{idPrato}")
+//    public ResponseEntity<PratoDTO> adicionarCategoriaPrato(
+//            @PathVariable("idCategoria") Long idCategoria, @PathVariable("idPrato") Long idPrato
+//    ) {
+//        PratoDTO pratoDTOSalvo = pratoService.adicionarCategoriaPrato(idPrato, idCategoria);
+//        return ResponseEntity.ok(pratoDTOSalvo);
+//    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<PratoDTO> atualizarPrato(@PathParam("id") Long Id, PratoDTO pratoDTO) {
+    public ResponseEntity<PratoDTO> atualizarPrato(@PathVariable("id") Long Id, PratoDTO pratoDTO) {
         PratoDTO pratoDTOCriado = pratoService.atualizarPrato(Id, pratoDTO);
         return ResponseEntity.ok(pratoDTOCriado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarPrato(@PathParam("id") Long Id) {
+    public ResponseEntity<Void> deletarPrato(@PathVariable("id") Long Id) {
         pratoService.excluirPrato(Id);
         return ResponseEntity.noContent().build();
     }

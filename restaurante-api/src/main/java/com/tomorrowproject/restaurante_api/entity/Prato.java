@@ -1,5 +1,6 @@
 package com.tomorrowproject.restaurante_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -17,8 +18,8 @@ public class Prato {
     private BigDecimal preco;
     private Integer tempoDePreparo;
 
-    //@ManyToOne
-    //private Categoria categoria;
+//    @ManyToOne
+//    private Categoria categoria;
 
     public Prato() {
     }
@@ -63,18 +64,18 @@ public class Prato {
         this.tempoDePreparo = tempoDePreparo;
     }
 
-    //public Categoria getCategoria() {
-    //    return categoria;
-    //}
-
-    //public void setCategoria(Categoria categoria) {
-    //    this.categoria = categoria;
-    //}
-
-    public Long getId() {
-        return id;
-    }
-
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
+//
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
 //    @Override
 //    public boolean equals(Object o) {
 //        if (!(o instanceof Prato prato)) return false;

@@ -1,5 +1,6 @@
 package com.tomorrowproject.restaurante_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -26,15 +27,13 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-//    public void addPrato(Prato prato){
-//        pratos.add(prato);
-//        prato.setCategoria(this);
-//    }
+    public void addPrato(Prato prato){
+        pratos.add(prato);
+    }
 
-//    public void removePrato(Prato prato){
-//        pratos.remove(prato);
-//        prato.setCategoria(null);
-//    }
+    public void removePrato(Prato prato){
+        pratos.remove(prato);
+    }
 
     public String getNome() {
         return nome;

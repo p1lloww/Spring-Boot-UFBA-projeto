@@ -24,6 +24,9 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private PratoRepository pratoRepository;
+
     @Transactional
     public List<CategoriaDTO> buscarTodasAsCategorias() {
 
@@ -52,6 +55,21 @@ public class CategoriaService {
     }
 
     @Transactional
+    public CategoriaDTO adicionarPrato(Long pratoId, Long categoriaId) {
+        Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(
+                () -> new IllegalArgumentException()
+        );
+        Prato prato = pratoRepository.findById(pratoId).orElseThrow(
+                () -> new IllegalArgumentException()
+        );
+
+        categoria.addPrato(prato);
+        Categoria categoriaSalva = categoriaRepository.save(categoria);
+        CategoriaDTO categoriaDTOSalva = ObjectMapper.parseObject(categoriaSalva, CategoriaDTO.class);
+        return categoriaDTOSalva;
+    }
+
+    @Transactional
     public CategoriaDTO atualizarCategoria(Long Id, CategoriaDTO categoriaDTO) {
 
         Categoria categoriaExistente = categoriaRepository.findById(Id).orElseThrow(
@@ -60,7 +78,7 @@ public class CategoriaService {
 
         categoriaExistente.setNome(categoriaDTO.getNome());
         categoriaExistente.setDescricao(categoriaDTO.getDescricao());
-        categoriaExistente.setPratos(ObjectMapper.parseListObjects(categoriaDTO.getPratosDTO(), Prato.class));
+        categoriaExistente.setPratos(ObjectMapper.parseListObjects(categoriaDTO.getPratos(), Prato.class));
 
         Categoria categoriaSalva = categoriaRepository.save(categoriaExistente);
         CategoriaDTO categoriaSalvaDTO = ObjectMapper.parseObject(categoriaSalva, CategoriaDTO.class);
