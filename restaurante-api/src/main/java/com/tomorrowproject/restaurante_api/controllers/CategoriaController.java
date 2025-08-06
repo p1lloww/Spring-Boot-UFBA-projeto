@@ -35,7 +35,7 @@ public class CategoriaController {
 
     @PostMapping("/criarCategoria")
     public ResponseEntity<CategoriaDTO> criarCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) {
-        CategoriaDTO categoriaCriada = ObjectMapper.parseObject(categoriaDTO, CategoriaDTO.class);
+        CategoriaDTO categoriaCriada = categoriaService.criarCategoria(categoriaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaCriada);
     }
 

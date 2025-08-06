@@ -3,6 +3,7 @@ package com.tomorrowproject.restaurante_api.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 public class Prato {
