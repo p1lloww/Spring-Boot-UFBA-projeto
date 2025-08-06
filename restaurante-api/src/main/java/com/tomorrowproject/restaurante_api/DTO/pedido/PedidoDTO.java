@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 
 public class PedidoDTO {
 
+    private Long clientePedidoId;
+
     private ClienteDTO cliente;
 
     @NotNull(message = "o status não pode ser nulo")
@@ -19,25 +21,24 @@ public class PedidoDTO {
     @Min(message = "o minimo precisa ser maior que 0", value = 0)
     private BigDecimal total;
 
-    @NotNull(message = "a data não pode ser nula")
     private LocalDateTime dataHora;
 
     public PedidoDTO() {
     }
 
-    public PedidoDTO(ClienteDTO cliente, StatusPedido status, BigDecimal total, LocalDateTime dataHora) {
-        this.cliente = cliente;
+    public PedidoDTO(Long clientePedidoId, StatusPedido status, BigDecimal total, LocalDateTime dataHora) {
+        this.clientePedidoId = clientePedidoId;
         this.status = status;
         this.total = total;
         this.dataHora = dataHora;
     }
 
-    public ClienteDTO getCliente() {
-        return cliente;
+    public Long getClientePedidoId() {
+        return clientePedidoId;
     }
 
-    public void setCliente(ClienteDTO cliente) {
-        this.cliente = cliente;
+    public void setClientePedidoId(Long clientePedidoId) {
+        this.clientePedidoId = clientePedidoId;
     }
 
     public StatusPedido getStatus() {
@@ -62,5 +63,13 @@ public class PedidoDTO {
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
+    }
+
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
     }
 }

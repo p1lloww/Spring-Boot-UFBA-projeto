@@ -1,16 +1,11 @@
 package com.tomorrowproject.restaurante_api.services;
 
-import com.tomorrowproject.restaurante_api.DTO.pedido.CriarPedidoDTO;
 import com.tomorrowproject.restaurante_api.DTO.pedido.PedidoDTO;
-import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
-import com.tomorrowproject.restaurante_api.entity.Categoria;
 import com.tomorrowproject.restaurante_api.entity.Cliente;
 import com.tomorrowproject.restaurante_api.entity.Pedido;
-import com.tomorrowproject.restaurante_api.entity.Prato;
-import com.tomorrowproject.restaurante_api.repository.CategoriaRepository;
+import com.tomorrowproject.restaurante_api.repository.ClienteRepository;
 import com.tomorrowproject.restaurante_api.repository.PedidoRepository;
-import com.tomorrowproject.restaurante_api.repository.PratoRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +22,8 @@ public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Transactional
     public List<PedidoDTO> buscarTodosOsPedidos() {
@@ -51,8 +48,15 @@ public class PedidoService {
 
     @Transactional
     public PedidoDTO criarPedido(PedidoDTO pedidoDTO) {
-        pedidoDTO.setDataHora(LocalDateTime.now());
         Pedido pedido = ObjectMapper.parseObject(pedidoDTO, Pedido.class);
+
+        Cliente cliente = clienteRepository.findById(pedidoDTO.getClientePedidoId()).orElseThrow(
+                () -> new IllegalArgumentException()
+        );
+
+        pedido.setClientePedidoId(pedidoDTO.getClientePedidoId());
+        pedido.setCliente(cliente);
+        pedido.setDataHora(LocalDateTime.now());
         Pedido pedidoSalvo = pedidoRepository.save(pedido);
         PedidoDTO pedidoDTOSalvo = ObjectMapper.parseObject(pedidoSalvo, PedidoDTO.class);
 
@@ -61,14 +65,24 @@ public class PedidoService {
 
     @Transactional
     public PedidoDTO atualizarPedido(Long Id, PedidoDTO pedidoDTO) {
+        log.info("id recebido do path variable: {}", Id);
+        log.info("pedido existe: {}", pedidoRepository.existsById(Id));
         Pedido pedido = pedidoRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new IllegalArgumentException("erro pedido")
         );
-        pedido.setCliente(ObjectMapper.parseObject(pedidoDTO.getCliente(), Cliente.class));
+
+        Cliente cliente = clienteRepository.findById(pedidoDTO.getClientePedidoId()).orElseThrow(
+                () -> new IllegalArgumentException("erro getclienteid")
+        );
+
+        pedido.setClientePedidoId(pedidoDTO.getClientePedidoId());
+        pedido.setCliente(cliente);
         pedido.setStatus(pedidoDTO.getStatus());
         pedido.setDataHora(LocalDateTime.now());
         pedido.setTotal(pedidoDTO.getTotal());
-        PedidoDTO pedidoDTOAtualizado = ObjectMapper.parseObject(pedido, PedidoDTO.class);
+
+        Pedido pedidoAtualizado = pedidoRepository.save(pedido);
+        PedidoDTO pedidoDTOAtualizado = ObjectMapper.parseObject(pedidoAtualizado, PedidoDTO.class);
 
         return pedidoDTOAtualizado;
     }

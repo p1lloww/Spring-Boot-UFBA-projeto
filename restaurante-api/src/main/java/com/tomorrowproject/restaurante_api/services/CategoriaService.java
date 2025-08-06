@@ -71,11 +71,9 @@ public class CategoriaService {
 
     @Transactional
     public CategoriaDTO atualizarCategoria(Long Id, CategoriaDTO categoriaDTO) {
-
         Categoria categoriaExistente = categoriaRepository.findById(Id).orElseThrow(
                 () -> new IllegalArgumentException()
         );
-
         categoriaExistente.setNome(categoriaDTO.getNome());
         categoriaExistente.setDescricao(categoriaDTO.getDescricao());
         categoriaExistente.setPratos(ObjectMapper.parseListObjects(categoriaDTO.getPratos(), Prato.class));

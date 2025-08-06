@@ -1,18 +1,13 @@
 package com.tomorrowproject.restaurante_api.repository;
 
-import com.tomorrowproject.restaurante_api.entity.Categoria;
 import com.tomorrowproject.restaurante_api.entity.Prato;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 public interface PratoRepository extends JpaRepository<Prato, Long> {
-    //List<Prato> findByCategoria(Categoria categoria);
-    //List<Prato> findByCategoriaId(Long categoriaId);
 
     List<Prato> findByNomeContainingIgnoreCase(String nome);
 
@@ -29,7 +24,6 @@ public interface PratoRepository extends JpaRepository<Prato, Long> {
     List<Prato> findAllByOrderByPrecoAsc();
     List<Prato> findAllByOrderByPrecoDesc();
     List<Prato> findAllByOrderByNomeAsc();
-    //List<Prato> findAllByCategoriaIdOrderByPrecoAsc(Long categoriaId);
 
     List<Prato> findTop5ByOrderByPrecoAsc();
     List<Prato> findTop10ByOrderByPrecoDesc();

@@ -2,6 +2,9 @@ package com.tomorrowproject.restaurante_api.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,6 @@ public class Categoria {
     private String nome;
     private String descricao;
 
-    //@OneToMany(mappedBy = "categoria")
     @OneToMany
     List<Prato> pratos = new ArrayList<>();
 

@@ -2,7 +2,6 @@ package com.tomorrowproject.restaurante_api.services;
 
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
-import com.tomorrowproject.restaurante_api.entity.Categoria;
 import com.tomorrowproject.restaurante_api.entity.Prato;
 import com.tomorrowproject.restaurante_api.repository.CategoriaRepository;
 import com.tomorrowproject.restaurante_api.repository.PratoRepository;
@@ -52,31 +51,18 @@ public class PratoService {
         return pratoDTOSalvo;
     }
 
-//    @Transactional
-//    public PratoDTO adicionarCategoriaPrato(Long pratoId, Long categoriaId) {
-//        Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(
-//                () -> new IllegalArgumentException()
-//        );
-//        Prato prato = pratoRepository.findById(pratoId).orElseThrow(
-//                () -> new IllegalArgumentException()
-//        );
-//
-//        prato.setCategoria(categoria);
-//        pratoRepository.save(prato);
-//        return ObjectMapper.parseObject(prato, PratoDTO.class);
-//    }
-
     @Transactional
     public PratoDTO atualizarPrato(Long Id, PratoDTO pratoDTO) {
-        Prato prato = pratoRepository.findById(Id).orElseThrow(
+        Prato pratoExistente = pratoRepository.findById(Id).orElseThrow(
                 () -> new IllegalArgumentException()
         );
-        prato.setNome(pratoDTO.getNome());
-        prato.setDescricao(pratoDTO.getDescricao());
-        //prato.setCategoria(ObjectMapper.parseObject(pratoDTO.getCategoria(), Categoria.class));
-        prato.setPreco(pratoDTO.getPreco());
-        prato.setTempoDePreparo(pratoDTO.getTempoDePreparo());
-        PratoDTO pratoDTOAtualizado = ObjectMapper.parseObject(prato, PratoDTO.class);
+        pratoExistente.setNome(pratoDTO.getNome());
+        pratoExistente.setDescricao(pratoDTO.getDescricao());
+        pratoExistente.setPreco(pratoDTO.getPreco());
+        pratoExistente.setTempoDePreparo(pratoDTO.getTempoDePreparo());
+
+        Prato pratoSalvo = pratoRepository.save(pratoExistente);
+        PratoDTO pratoDTOAtualizado = ObjectMapper.parseObject(pratoSalvo, PratoDTO.class);
 
         return pratoDTOAtualizado;
     }

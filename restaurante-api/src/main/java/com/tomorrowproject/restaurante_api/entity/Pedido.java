@@ -14,6 +14,8 @@ public class Pedido {
     @GeneratedValue
     private Long id;
 
+    private Long clientePedidoId;
+
     @ManyToOne
     private Cliente cliente;
 
@@ -67,6 +69,14 @@ public class Pedido {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getClientePedidoId() {
+        return clientePedidoId;
+    }
+
+    public void setClientePedidoId(Long clienteId) {
+        this.clientePedidoId = clienteId;
     }
 
     @Override

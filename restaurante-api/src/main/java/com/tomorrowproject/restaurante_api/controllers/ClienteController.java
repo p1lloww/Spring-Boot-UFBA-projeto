@@ -1,13 +1,7 @@
 package com.tomorrowproject.restaurante_api.controllers;
 
-import com.tomorrowproject.restaurante_api.DTO.categoria.CategoriaDTO;
 import com.tomorrowproject.restaurante_api.DTO.cliente.ClienteDTO;
-import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
-import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
-import com.tomorrowproject.restaurante_api.services.CategoriaService;
 import com.tomorrowproject.restaurante_api.services.ClienteService;
-import com.tomorrowproject.restaurante_api.services.PratoService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +17,14 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> findAll() {
-
         List<ClienteDTO> clienteDTOs = clienteService.buscarTodosOsClientes();
         return ResponseEntity.ok(clienteDTOs);
+    }
+
+    @GetMapping("/buscarPorId/{id}")
+    public ResponseEntity<ClienteDTO> buscarPorId(@PathVariable("id") Long id) {
+        ClienteDTO clienteDTO = clienteService.buscarClientePorID(id);
+        return ResponseEntity.ok(clienteDTO);
     }
 
     @PostMapping("/criarCliente")

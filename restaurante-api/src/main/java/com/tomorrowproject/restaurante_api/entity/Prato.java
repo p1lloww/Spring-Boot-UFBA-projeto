@@ -18,9 +18,6 @@ public class Prato {
     private BigDecimal preco;
     private Integer tempoDePreparo;
 
-//    @ManyToOne
-//    private Categoria categoria;
-
     public Prato() {
     }
 
@@ -29,7 +26,6 @@ public class Prato {
         this.descricao = descricao;
         this.preco = preco;
         this.tempoDePreparo = tempoDePreparo;
-        //this.categoria = categoria;
     }
 
     public String getNome() {
@@ -64,26 +60,18 @@ public class Prato {
         this.tempoDePreparo = tempoDePreparo;
     }
 
-//    public Categoria getCategoria() {
-//        return categoria;
-//    }
-//
-//    public void setCategoria(Categoria categoria) {
-//        this.categoria = categoria;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (!(o instanceof Prato prato)) return false;
-//        return Objects.equals(id, prato.id) && Objects.equals(nome, prato.nome) && Objects.equals(descricao, prato.descricao) && Objects.equals(preco, prato.preco) && Objects.equals(tempoDePreparo, prato.tempoDePreparo) && Objects.equals(categoria, prato.categoria);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, nome, descricao, preco, tempoDePreparo, categoria);
-//    }
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Prato prato)) return false;
+        return Objects.equals(id, prato.id) && Objects.equals(nome, prato.nome) && Objects.equals(descricao, prato.descricao) && Objects.equals(preco, prato.preco) && Objects.equals(tempoDePreparo, prato.tempoDePreparo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, descricao, preco, tempoDePreparo);
+    }
 }
