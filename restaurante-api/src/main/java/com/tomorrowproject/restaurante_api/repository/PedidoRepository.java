@@ -4,8 +4,6 @@ import com.tomorrowproject.restaurante_api.entity.Cliente;
 import com.tomorrowproject.restaurante_api.entity.Pedido;
 import com.tomorrowproject.restaurante_api.enums.StatusPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
