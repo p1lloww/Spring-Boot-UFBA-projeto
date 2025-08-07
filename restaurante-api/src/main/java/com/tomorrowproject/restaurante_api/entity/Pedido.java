@@ -67,16 +67,16 @@ public class Pedido {
         this.dataHora = dataHora;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public Long getClientePedidoId() {
         return clientePedidoId;
     }
 
-    public void setClientePedidoId(Long clienteId) {
-        this.clientePedidoId = clienteId;
+    public void setClientePedidoId(Long clientePedidoId) {
+        this.clientePedidoId = clientePedidoId;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

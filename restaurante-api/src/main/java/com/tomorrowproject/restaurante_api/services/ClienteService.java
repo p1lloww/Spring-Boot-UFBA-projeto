@@ -3,7 +3,9 @@ package com.tomorrowproject.restaurante_api.services;
 import com.tomorrowproject.restaurante_api.DTO.cliente.ClienteDTO;
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
+import com.tomorrowproject.restaurante_api.entity.Categoria;
 import com.tomorrowproject.restaurante_api.entity.Cliente;
+import com.tomorrowproject.restaurante_api.exception.NotFoundException;
 import com.tomorrowproject.restaurante_api.repository.ClienteRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -31,7 +33,7 @@ public class ClienteService {
     @Transactional
     public ClienteDTO buscarClientePorID(Long Id) {
         Cliente cliente = clienteRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new NotFoundException("Id do cliente inexistente")
         );
 
         ClienteDTO clienteDTO = ObjectMapper.parseObject(cliente, ClienteDTO.class);
@@ -51,7 +53,7 @@ public class ClienteService {
     @Transactional
     public ClienteDTO atualizarCliente(Long Id, ClienteDTO clienteDTO) {
         Cliente cliente = clienteRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new NotFoundException("Id do cliente inexistente")
         );
         cliente.setNome(clienteDTO.getNome());
         cliente.setEndereco(cliente.getEndereco());
@@ -63,6 +65,9 @@ public class ClienteService {
 
     @Transactional
     public void excluirCliente(Long Id) {
+        Cliente cliente = clienteRepository.findById(Id).orElseThrow(
+                () -> new NotFoundException("Id do cliente não localizado ou inexistente")
+        );
         clienteRepository.deleteById(Id);
     }
 }
