@@ -4,6 +4,7 @@ import com.tomorrowproject.restaurante_api.DTO.pedido.PedidoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
 import com.tomorrowproject.restaurante_api.entity.Cliente;
 import com.tomorrowproject.restaurante_api.entity.Pedido;
+import com.tomorrowproject.restaurante_api.exception.NotFoundException;
 import com.tomorrowproject.restaurante_api.repository.ClienteRepository;
 import com.tomorrowproject.restaurante_api.repository.PedidoRepository;
 import jakarta.transaction.Transactional;
@@ -22,6 +23,7 @@ public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -38,7 +40,7 @@ public class PedidoService {
     public PedidoDTO buscarPedidoPorID(Long Id) {
 
         Pedido pedido = pedidoRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new NotFoundException("Falha ao Identificar o id do pedido")
         );
 
         PedidoDTO pedidoDTO = ObjectMapper.parseObject(pedido, PedidoDTO.class);
@@ -51,14 +53,17 @@ public class PedidoService {
         Pedido pedido = ObjectMapper.parseObject(pedidoDTO, Pedido.class);
 
         Cliente cliente = clienteRepository.findById(pedidoDTO.getClientePedidoId()).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new NotFoundException("Falha ao Identificar o id do cliente")
         );
 
-        pedido.setClientePedidoId(pedidoDTO.getClientePedidoId());
         pedido.setCliente(cliente);
         pedido.setDataHora(LocalDateTime.now());
+
         Pedido pedidoSalvo = pedidoRepository.save(pedido);
+
         PedidoDTO pedidoDTOSalvo = ObjectMapper.parseObject(pedidoSalvo, PedidoDTO.class);
+        pedido.setClientePedidoId(pedido.getClientePedidoId());
+        clienteRepository.save(cliente);
 
         return pedidoDTOSalvo;
     }
@@ -68,14 +73,13 @@ public class PedidoService {
         log.info("id recebido do path variable: {}", Id);
         log.info("pedido existe: {}", pedidoRepository.existsById(Id));
         Pedido pedido = pedidoRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException("erro pedido")
+                () -> new NotFoundException("Falha ao Identificar o id do pedido")
         );
 
         Cliente cliente = clienteRepository.findById(pedidoDTO.getClientePedidoId()).orElseThrow(
-                () -> new IllegalArgumentException("erro getclienteid")
+                () -> new NotFoundException("Falha ao Identificar o id do cliente")
         );
 
-        pedido.setClientePedidoId(pedidoDTO.getClientePedidoId());
         pedido.setCliente(cliente);
         pedido.setStatus(pedidoDTO.getStatus());
         pedido.setDataHora(LocalDateTime.now());
@@ -89,6 +93,9 @@ public class PedidoService {
 
     @Transactional
     public void excluirPedido(Long Id) {
+        Pedido pedido = pedidoRepository.findById(Id).orElseThrow(
+                () -> new NotFoundException("Id do pedido não localizado ou inexistente")
+        );
         pedidoRepository.deleteById(Id);
     }
 }

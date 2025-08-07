@@ -5,6 +5,7 @@ import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
 import com.tomorrowproject.restaurante_api.entity.Categoria;
 import com.tomorrowproject.restaurante_api.entity.Prato;
+import com.tomorrowproject.restaurante_api.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.hibernate.sql.exec.ExecutionException;
 import org.slf4j.Logger;
@@ -39,7 +40,9 @@ public class CategoriaService {
     @Transactional
     public CategoriaDTO BuscarCategoriaPorID(Long Id) {
 
-        Categoria categoria = categoriaRepository.findById(Id).orElseThrow(() -> new ExecutionException("exception id"));
+        Categoria categoria = categoriaRepository.findById(Id).orElseThrow(
+                () -> new NotFoundException("Id da categoria não localizado ou inexistente")
+        );
 
         CategoriaDTO categoriaDTO = ObjectMapper.parseObject(categoria, CategoriaDTO.class);
 
@@ -57,10 +60,10 @@ public class CategoriaService {
     @Transactional
     public CategoriaDTO adicionarPrato(Long pratoId, Long categoriaId) {
         Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new IllegalArgumentException("Id da categoria não localizado ou inexistente")
         );
         Prato prato = pratoRepository.findById(pratoId).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new IllegalArgumentException("Id do prato não localizado ou inexistente")
         );
 
         categoria.addPrato(prato);
@@ -72,7 +75,7 @@ public class CategoriaService {
     @Transactional
     public CategoriaDTO atualizarCategoria(Long Id, CategoriaDTO categoriaDTO) {
         Categoria categoriaExistente = categoriaRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new NotFoundException("Id da categoria não localizado ou inexistente")
         );
         categoriaExistente.setNome(categoriaDTO.getNome());
         categoriaExistente.setDescricao(categoriaDTO.getDescricao());
@@ -87,7 +90,9 @@ public class CategoriaService {
     @Transactional
     public void excluirCategoria(Long Id) {
         log.info("excluindo usuario");
-
+        Categoria categoria = categoriaRepository.findById(Id).orElseThrow(
+                () -> new NotFoundException("Id da categoria não localizado ou inexistente")
+        );
         categoriaRepository.deleteById(Id);
     }
 
@@ -95,7 +100,9 @@ public class CategoriaService {
     public List<PratoDTO> buscarPratosPorCategoriaId(Long categoriaId) {
         log.info("buscando pratos da categoriaId: {}", categoriaId);
 
-        Categoria categoriaEntity = categoriaRepository.findById(categoriaId).orElseThrow(() -> new IllegalArgumentException("argumento invalido"));
+        Categoria categoriaEntity = categoriaRepository.findById(categoriaId).orElseThrow(
+                () -> new NotFoundException("Id da categoria não localizado ou inexistente")
+        );
         List<Prato> pratosEntity = categoriaEntity.getPratos();
         List<PratoDTO> pratosDTO = ObjectMapper.parseListObjects(pratosEntity, PratoDTO.class);
 

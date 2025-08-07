@@ -2,7 +2,9 @@ package com.tomorrowproject.restaurante_api.services;
 
 import com.tomorrowproject.restaurante_api.DTO.prato.PratoDTO;
 import com.tomorrowproject.restaurante_api.Mapper.ObjectMapper;
+import com.tomorrowproject.restaurante_api.entity.Cliente;
 import com.tomorrowproject.restaurante_api.entity.Prato;
+import com.tomorrowproject.restaurante_api.exception.NotFoundException;
 import com.tomorrowproject.restaurante_api.repository.CategoriaRepository;
 import com.tomorrowproject.restaurante_api.repository.PratoRepository;
 import jakarta.transaction.Transactional;
@@ -34,7 +36,7 @@ public class PratoService {
     @Transactional
     public PratoDTO buscarPratoPorID(Long Id) {
         Prato prato = pratoRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new NotFoundException("Falha ao Identificar o id do prato")
         );
 
         PratoDTO pratoDTO = ObjectMapper.parseObject(prato, PratoDTO.class);
@@ -54,7 +56,7 @@ public class PratoService {
     @Transactional
     public PratoDTO atualizarPrato(Long Id, PratoDTO pratoDTO) {
         Prato pratoExistente = pratoRepository.findById(Id).orElseThrow(
-                () -> new IllegalArgumentException()
+                () -> new NotFoundException("Falha ao Identificar o id do prato")
         );
         pratoExistente.setNome(pratoDTO.getNome());
         pratoExistente.setDescricao(pratoDTO.getDescricao());
@@ -69,6 +71,9 @@ public class PratoService {
 
     @Transactional
     public void excluirPrato(Long Id) {
+        Prato prato = pratoRepository.findById(Id).orElseThrow(
+                () -> new NotFoundException("Id do prato não localizado ou inexistente")
+        );
         pratoRepository.deleteById(Id);
     }
 }
