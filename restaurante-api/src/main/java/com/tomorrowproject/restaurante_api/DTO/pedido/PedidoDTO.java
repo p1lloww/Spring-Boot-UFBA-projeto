@@ -2,9 +2,6 @@ package com.tomorrowproject.restaurante_api.DTO.pedido;
 
 import com.tomorrowproject.restaurante_api.DTO.cliente.ClienteDTO;
 import com.tomorrowproject.restaurante_api.enums.StatusPedido;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,9 +10,7 @@ import java.time.LocalDateTime;
 
 public class PedidoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pedidoId;
+    private Long clientePedidoId;
 
     private ClienteDTO cliente;
 
@@ -32,18 +27,18 @@ public class PedidoDTO {
     }
 
     public PedidoDTO(Long clientePedidoId, StatusPedido status, BigDecimal total, LocalDateTime dataHora) {
-        this.pedidoId = clientePedidoId;
+        this.clientePedidoId = clientePedidoId;
         this.status = status;
         this.total = total;
         this.dataHora = dataHora;
     }
 
     public Long getClientePedidoId() {
-        return pedidoId;
+        return clientePedidoId;
     }
 
     public void setClientePedidoId(Long clientePedidoId) {
-        this.pedidoId = clientePedidoId;
+        this.clientePedidoId = clientePedidoId;
     }
 
     public StatusPedido getStatus() {
