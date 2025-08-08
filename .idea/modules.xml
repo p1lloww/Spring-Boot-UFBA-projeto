@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Spring-Boot-UFBA-projeto.iml" filepath="$PROJECT_DIR$/.idea/Spring-Boot-UFBA-projeto.iml" />
-      <module fileurl="file://$PROJECT_DIR$/restaurante-api/restaurante-api.iml" filepath="$PROJECT_DIR$/restaurante-api/restaurante-api.iml" />
     </modules>
   </component>
 </project>

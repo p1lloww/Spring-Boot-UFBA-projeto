@@ -2,7 +2,6 @@ package com.tomorrowproject.restaurante_api.config;
 
 import com.tomorrowproject.restaurante_api.entity.Role;
 import com.tomorrowproject.restaurante_api.entity.User;
-import com.tomorrowproject.restaurante_api.exception.handler.CustomEntityResponseEntity;
 import com.tomorrowproject.restaurante_api.repository.RoleRepository;
 import com.tomorrowproject.restaurante_api.repository.UserRepository;
 import jakarta.transaction.Transactional;

@@ -4,6 +4,17 @@ jwt:
   private:
     key: classpath:app.key
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/api/**'
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
