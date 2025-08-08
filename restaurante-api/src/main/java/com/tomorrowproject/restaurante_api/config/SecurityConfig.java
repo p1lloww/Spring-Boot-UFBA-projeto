@@ -35,18 +35,31 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll()
+                        .requestMatchers("/h2-console/**", "/login").permitAll()
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api-docs/**",
+                                "/webjars/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
-                .csrf(csrf -> csrf.disable())
-                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-                .securityMatcher(request -> true) // Aplica para todas as requisições
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
+                        .disable()
+                )
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.sameOrigin())
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                )
-                .oauth2ResourceServer(oauth2 -> oauth2.disable());
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
 
         return http.build();
     }
+
 
 
 
