@@ -19,9 +19,6 @@ public class Pedido {
     @ManyToOne
     private Cliente cliente;
 
-    @ManyToOne
-    private User user;
-
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
@@ -76,14 +73,6 @@ public class Pedido {
 
     public void setClientePedidoId(Long clientePedidoId) {
         this.clientePedidoId = clientePedidoId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Long getId() {
