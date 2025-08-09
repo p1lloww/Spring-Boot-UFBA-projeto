@@ -1,5 +1,27 @@
 # Spring-Boot-UFBA-projeto
+
 Projeto de conclusão do curso de programação backend com Spring Boot / Spring Boot backend programming course conclusion project
+
+# PARA QUESTÕES DE AVALIAÇÃO (IMPORTANTE)
+
+PARA TER ACESSO A TODAS AS FUNCIONALIDADES VOCE PRECISA ESTAR LOGADO COMO ADMIN, PARA FAZER ISSO SIGA O PASSO A PASSO
+
+1.acesse localhost:8080/login com metodo POST e coloque no body o seguinte(JSON):
+{
+    "username": "admin",
+    "password": "123"
+}
+vai ser retornado para voce algo como:
+{
+    "accessToken": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJteWJhY2tlbmQiLCJzdWIiOiI0ZGEyYzliYy0zNzhkLTRhNzMtOTM4YS1mYzQxNGFjN2I1N2YiLCJleHAiOjE3NTQ3NTc3OTMsInNjb3BlIjoiYWRtaW4ifQ.avBFFMmbS_XoahQQSnnYlX7jq9N6XcmECB8to0nctduTwDru7SDf_ItS3HKl8-lJP1el9hq6ePoXQ08iOLTj27cb1B7JuLjP7_Eb0JRcEqJOydRrY-3mBxnaS5gFvKvqSMq1dtCdRyl7QW2JI6OIIIkq5eiwPusl1vuxLfbGPjiQN4yGOBF4ud_tfJCXwyvmitY0E-N4hz2JtOg4KwvEfBTbXxCHIw_ypaG0UEa3iFxOeID3jRtIFfSTx1ujxHln30Vk13Rd1S5OYSzyXrLABK4Rqray-1SxF_FssU0uw1BgZWZcHbymtYsO3IxkGicA3RLx5h4g47BIB2BeE_u31A",
+    "expiresIn": 300
+}
+esse monte de numeros e letras é o seu token.
+2.copie o seu token e para cada requisição em todos os endpoints vc vai colocar no seu header o seguinte:
+em KEY voce vai colocar Authorization e em value voce vai colocar Bearer token
+vai ficar algo mais ou menos assim
+Authorization | Baerer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJteWJhY2tlbmQiLCJzdWIiOiI0ZGEy...
+apos isso voce pode testar o endpoints
 
 # API de Restaurante
 
