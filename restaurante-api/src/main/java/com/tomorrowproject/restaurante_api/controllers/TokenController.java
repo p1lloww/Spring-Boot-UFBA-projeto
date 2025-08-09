@@ -2,7 +2,9 @@ package com.tomorrowproject.restaurante_api.controllers;
 
 import com.tomorrowproject.restaurante_api.DTO.LoginRequest;
 import com.tomorrowproject.restaurante_api.DTO.LoginResponse;
+import com.tomorrowproject.restaurante_api.entity.Role;
 import com.tomorrowproject.restaurante_api.repository.UserRepository;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
+import java.util.stream.Collectors;
 
 @RestController
 public class TokenController {
@@ -44,11 +47,16 @@ public class TokenController {
         var now = Instant.now();
         var expiresIn = 300L;
 
+        var scopes = user.get().getRoles()
+            .stream()
+            .map(Role::getName)
+            .collect(Collectors.joining(" "));
+
         var claims = JwtClaimsSet.builder()
                 .issuer("mybackend")
                 .subject(user.get().getUserId().toString())
                 .expiresAt(now.plusSeconds(expiresIn))
-                .issuedAt(now)
+                .claim("scope", scopes)
                 .build();
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
