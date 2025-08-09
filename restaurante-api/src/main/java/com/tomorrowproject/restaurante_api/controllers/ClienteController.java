@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ClienteController {
 
     @Operation(summary = "Lista todos os clientes", description = "Retorna uma lista completa de todos os clientes cadastrados")
     @ApiResponse(responseCode = "200", description = "Lista de clientes retornada com sucesso")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> findAll() {
         List<ClienteDTO> clienteDTOs = clienteService.buscarTodosOsClientes();
@@ -33,6 +35,7 @@ public class ClienteController {
     @Operation(summary = "Busca um cliente por ID", description = "Retorna um cliente específico baseado no ID fornecido")
     @ApiResponse(responseCode = "200", description = "Cliente encontrado e retornado")
     @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @GetMapping("/buscarPorId/{id}")
     public ResponseEntity<ClienteDTO> buscarPorId(@PathVariable("id") Long id) {
         ClienteDTO clienteDTO = clienteService.buscarClientePorID(id);
@@ -61,6 +64,7 @@ public class ClienteController {
     @Operation(summary = "Deleta um cliente", description = "Exclui um cliente do sistema")
     @ApiResponse(responseCode = "204", description = "Cliente deletado com sucesso")
     @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCliente(@PathVariable("id") Long Id) {
         clienteService.excluirCliente(Id);
