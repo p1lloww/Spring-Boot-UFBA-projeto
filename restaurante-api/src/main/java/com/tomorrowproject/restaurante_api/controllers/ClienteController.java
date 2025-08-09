@@ -46,7 +46,7 @@ public class ClienteController {
     @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso",
             content = @Content(schema = @Schema(implementation = ClienteDTO.class)))
     @ApiResponse(responseCode = "400", description = "Dados de cliente inválidos")
-    @PostMapping("/criarCliente")
+    @PostMapping
     public ResponseEntity<ClienteDTO> criarCliente(@RequestBody ClienteDTO clienteDTO) {
         ClienteDTO clienteCriada = clienteService.criarCliente(clienteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteCriada);

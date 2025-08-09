@@ -38,9 +38,9 @@ public class CategoriaController {
             description = "Retorna uma categoria específica baseada no ID fornecido")
     @ApiResponse(responseCode = "200", description = "Categoria encontrada e retornada")
     @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
-    @GetMapping("/buscarPorId/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CategoriaDTO> buscarPorId(@PathVariable("id") Long id) {
-        CategoriaDTO categoriaDTO = categoriaService.BuscarCategoriaPorID(id);
+        CategoriaDTO categoriaDTO = categoriaService.buscarCategoriaPorID(id);
         return ResponseEntity.ok(categoriaDTO);
     }
 
@@ -49,7 +49,7 @@ public class CategoriaController {
     @ApiResponse(responseCode = "201", description = "Categoria criada com sucesso",
             content = @Content(schema = @Schema(implementation = CategoriaDTO.class)))
     @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos")
-    @PostMapping("/criarCategoria")
+    @PostMapping
     public ResponseEntity<CategoriaDTO> criarCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) {
         CategoriaDTO categoriaCriada = categoriaService.criarCategoria(categoriaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaCriada);
@@ -59,7 +59,7 @@ public class CategoriaController {
             description = "Associa um prato existente a uma categoria existente")
     @ApiResponse(responseCode = "200", description = "Prato adicionado à categoria com sucesso")
     @ApiResponse(responseCode = "404", description = "Categoria ou Prato não encontrados")
-    @PostMapping("/adicionarPrato/{idCategoria}/{idPrato}")
+    @PostMapping("/{idCategoria}/prato/{idPrato}")
     public ResponseEntity<CategoriaDTO> adicionarPrato(
             @PathVariable("idCategoria") Long idCategoria, @PathVariable("idPrato") Long idPrato
     ) {
@@ -72,8 +72,8 @@ public class CategoriaController {
     @ApiResponse(responseCode = "200", description = "Categoria atualizada com sucesso")
     @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
     @PutMapping("/{id}")
-    public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable("id") Long Id, @Valid @RequestBody CategoriaDTO categoriaDTO) {
-        CategoriaDTO categoriaAtualizada = categoriaService.atualizarCategoria(Id, categoriaDTO);
+    public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable("id") Long id, @Valid @RequestBody CategoriaDTO categoriaDTO) {
+        CategoriaDTO categoriaAtualizada = categoriaService.atualizarCategoria(id, categoriaDTO);
         return ResponseEntity.ok(categoriaAtualizada);
     }
 
@@ -82,8 +82,8 @@ public class CategoriaController {
     @ApiResponse(responseCode = "204", description = "Categoria deletada com sucesso")
     @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarCategoria(@PathVariable("id") Long Id) {
-        categoriaService.excluirCategoria(Id);
+    public ResponseEntity<Void> deletarCategoria(@PathVariable("id") Long id) {
+        categoriaService.excluirCategoria(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -92,8 +92,8 @@ public class CategoriaController {
     @ApiResponse(responseCode = "200", description = "Lista de pratos retornada com sucesso")
     @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
     @GetMapping("/{id}/pratos")
-    public ResponseEntity<List<PratoDTO>> listarPratosDeUmaCategoria(@PathVariable("id") Long Id) {
-        List<PratoDTO> pratos = categoriaService.buscarPratosPorCategoriaId(Id);
+    public ResponseEntity<List<PratoDTO>> listarPratosDeUmaCategoria(@PathVariable("id") Long id) {
+        List<PratoDTO> pratos = categoriaService.buscarPratosPorCategoriaId(id);
         return ResponseEntity.ok(pratos);
     }
 }

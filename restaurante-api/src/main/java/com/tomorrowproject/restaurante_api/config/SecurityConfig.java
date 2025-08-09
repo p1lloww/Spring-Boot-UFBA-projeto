@@ -34,13 +34,45 @@ public class SecurityConfig {
     @Value("${jwt.private.key}")
     private RSAPrivateKey privateKey;
 
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeHttpRequests(authorize -> authorize
+//                        .requestMatchers("/h2-console/**", "/login").permitAll()
+//                        .requestMatchers(
+//                                "/swagger-ui.html",
+//                                "/swagger-ui/**",
+//                                "/v3/api-docs/**",
+//                                "/api-docs/**",
+//                                "/webjars/**"
+//                        ).permitAll()
+//                        .anyRequest().authenticated()
+//                )
+//                .csrf(csrf -> csrf
+//                        .ignoringRequestMatchers("/h2-console/**")
+//                        .disable()
+//                )
+//                .headers(headers -> headers
+//                        .frameOptions(frame -> frame.sameOrigin())
+//                )
+//                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+//                .sessionManagement(session -> session
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                );
+//
+//        return http.build();
+//    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // ⚠️ CONFIGURAÇÃO TEMPORÁRIA - LIBERA TUDO PARA DESENVOLVIMENTO
                 .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers("/h2-console/**", "/login").permitAll()
+
+                        // Swagger/OpenAPI
                         .requestMatchers(
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
@@ -48,16 +80,26 @@ public class SecurityConfig {
                                 "/api-docs/**",
                                 "/webjars/**"
                         ).permitAll()
-                        .anyRequest().authenticated()
+
+                        // ⚠️ TEMPORÁRIO: Libera TODAS as outras requisições
+                        .anyRequest().permitAll() // Era: .anyRequest().authenticated()
                 )
+
+                // CSRF configuração mantida igual
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**")
                         .disable()
                 )
+
+                // Headers mantidos iguais
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.sameOrigin())
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+
+                // ⚠️ OAuth2 JWT DESABILITADO TEMPORARIAMENTE
+                // .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+
+                // Session management mantido igual
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );

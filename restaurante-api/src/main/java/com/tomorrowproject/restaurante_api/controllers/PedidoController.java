@@ -39,7 +39,7 @@ public class PedidoController {
     @Operation(summary = "Busca um pedido por ID", description = "Retorna um pedido específico baseado no ID fornecido")
     @ApiResponse(responseCode = "200", description = "Pedido encontrado e retornado")
     @ApiResponse(responseCode = "404", description = "Pedido não encontrado")
-    @GetMapping("/buscarPorId/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PedidoDTO> buscarPorId(@PathVariable("id") Long id) {
         PedidoDTO pedidoDTO = pedidoService.buscarPedidoPorID(id);
         return ResponseEntity.ok(pedidoDTO);
@@ -49,7 +49,7 @@ public class PedidoController {
     @ApiResponse(responseCode = "201", description = "Pedido criado com sucesso",
             content = @Content(schema = @Schema(implementation = PedidoDTO.class)))
     @ApiResponse(responseCode = "400", description = "Dados de pedido inválidos")
-    @PostMapping("/criarPedido")
+    @PostMapping
     public ResponseEntity<PedidoDTO> criarPedido(@Valid @RequestBody PedidoDTO pedidoDTO) {
         PedidoDTO pedidoCriado = pedidoService.criarPedido(pedidoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoCriado);

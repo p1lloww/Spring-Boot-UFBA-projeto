@@ -36,7 +36,7 @@ public class PratoController {
     @Operation(summary = "Busca um prato por ID", description = "Retorna um prato específico baseado no ID fornecido")
     @ApiResponse(responseCode = "200", description = "Prato encontrado e retornado")
     @ApiResponse(responseCode = "404", description = "Prato não encontrado")
-    @GetMapping("/buscarPorId/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PratoDTO> buscarPorId(@PathVariable("id") Long id) {
         PratoDTO pratoDTO = pratoService.buscarPratoPorID(id);
         return ResponseEntity.ok(pratoDTO);
@@ -46,7 +46,7 @@ public class PratoController {
     @ApiResponse(responseCode = "201", description = "Prato criado com sucesso",
             content = @Content(schema = @Schema(implementation = PratoDTO.class)))
     @ApiResponse(responseCode = "400", description = "Dados de prato inválidos")
-    @PostMapping("/criarPrato")
+    @PostMapping
     public ResponseEntity<PratoDTO> criarPrato(@Valid @RequestBody PratoDTO pratoDTO) {
         PratoDTO pratoDTOCriado = pratoService.criarPrato(pratoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pratoDTOCriado);
