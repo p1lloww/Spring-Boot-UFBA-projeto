@@ -33,7 +33,7 @@ public class ClienteController {
     @Operation(summary = "Busca um cliente por ID", description = "Retorna um cliente específico baseado no ID fornecido")
     @ApiResponse(responseCode = "200", description = "Cliente encontrado e retornado")
     @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
-    @GetMapping("/buscarPorId/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ClienteDTO> buscarPorId(@PathVariable("id") Long id) {
         ClienteDTO clienteDTO = clienteService.buscarClientePorID(id);
         return ResponseEntity.ok(clienteDTO);
@@ -43,7 +43,7 @@ public class ClienteController {
     @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso",
             content = @Content(schema = @Schema(implementation = ClienteDTO.class)))
     @ApiResponse(responseCode = "400", description = "Dados de cliente inválidos")
-    @PostMapping("/criarCliente")
+    @PostMapping
     public ResponseEntity<ClienteDTO> criarCliente(@RequestBody ClienteDTO clienteDTO) {
         ClienteDTO clienteCriada = clienteService.criarCliente(clienteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteCriada);
