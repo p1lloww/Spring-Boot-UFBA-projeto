@@ -28,7 +28,7 @@ vai ficar algo mais ou menos assim
 
 Authorization | Baerer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJteWJhY2tlbmQiLCJzdWIiOiI0ZGEy...
 
-apos isso voce pode testar o endpoints
+apos isso voce pode testar os endpoints
 
 
 # API de Restaurante
